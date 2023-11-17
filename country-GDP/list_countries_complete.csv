@@ -1,0 +1,199 @@
+country,flag_filename,Column3,GSP,Column5
+"Norway",no.png,,88947.02169,1
+"Bermuda",bm.png,,86346.75172,2
+"Switzerland",ch.png,,82592.44418,3
+"Isle of Man",im.png,,80995.6038,4
+"Macao SAR, China",mo.png,,76201.00465,5
+"Qatar",qa.png,,75930.95119,6
+"Australia",au.png,,59132.64924,7
+"Denmark",dk.png,,58372.94414,8
+"Ireland",ie.png,,56406.02465,9
+"San Marino",sm.png,,55637.52698,10
+"Sweden",se.png,,55536.13168,11
+"Singapore",sg.png,,54470.93591,12
+"United States",us.png,,54091.11428,13
+"Iceland",is.png,,53214.30529,14
+"Faroe Islands",fo.png,,51391.20286,15
+"Netherlands",nl.png,,49982.80921,16
+"Austria",at.png,,48236.9666,17
+"Canada",ca.png,,48172.71942,18
+"Finland",fi.png,,46969.26564,19
+"Greenland",gl.png,,46836.37552,20
+"Belgium",be.png,,44542.50276,21
+"Germany",de.png,,44479.81275,22
+"United Kingdom",gb.png,,42202.85785,23
+"Japan",jp.png,,41476.67343,24
+"United Arab Emirates",ae.png,,40456.98143,25
+"France",fr.png,,40359.14672,26
+"New Zealand",nz.png,,40145.40093,27
+"Hong Kong SAR, China",hk.png,,39438.12136,28
+"Kuwait",kw.png,,39368.01521,29
+"Andorra",ad.png,,39319.6925,30
+"Brunei Darussalam",bn.png,,37782.77874,31
+"Israel",il.png,,35594.03626,32
+"Italy",it.png,,34109.39947,33
+"Guam",gu.png,,33533.48281,34
+"Bahamas, The",bs.png,,29077.04624,35
+"Spain",es.png,,28827.33751,36
+"Puerto Rico",pr.png,,28490.92135,37
+"Cyprus",cy.png,,27535.24296,38
+"Korea, Rep.",kr.png,,26085.3839,39
+"Aruba",aw.png,,25057.03987,40
+"Malta",mt.png,,23836.85279,41
+"Bahrain",bh.png,,23207.64664,42
+"Slovenia",si.png,,23080.03783,43
+"Saudi Arabia",sa.png,,22425.93215,44
+"Greece",gr.png,,21735.28038,45
+"Portugal",pt.png,,21316.24707,46
+"Czech Republic",cz.png,,19684.35963,47
+"Oman",om.png,,18834.89095,48
+"Trinidad and Tobago",tt.png,,18120.9402,49
+"Estonia",ee.png,,18084.45735,50
+"Northern Mariana Islands",mp.png,,17608.11473,51
+"Slovak Republic",sk.png,,17398.69959,52
+"St. Kitts and Nevis",kn.png,,16446.21645,53
+"Barbados",bb.png,,16289.51966,54
+"Equatorial Guinea",gq.png,,16221.09014,55
+"Uruguay",uy.png,,15235.58437,56
+"Lithuania",lt.png,,14875.84782,57
+"Chile",cl.png,,14597.18321,58
+"Latvia",lv.png,,14132.28765,59
+"Seychelles",sc.png,,13739.86686,60
+"Hungary",hu.png,,13448.35814,61
+"Poland",pl.png,,13325.99879,62
+"Croatia",hr.png,,13320.28921,63
+"Antigua and Barbuda",ag.png,,13078.8685,64
+"Argentina",ar.png,,12743.22201,65
+"Russian Federation",ru.png,,12425.2935,66
+"Panama",pa.png,,12001.19275,67
+"Palau",pw.png,,11539.67662,68
+"Turkey",tr.png,,11349.67499,69
+"American Samoa",as.png,,11327.37717,70
+"Brazil",br.png,,11017.43695,71
+"Kazakhstan",kz.png,,10880.62689,72
+"Costa Rica",cr.png,,10426.23082,73
+"Malaysia",my.png,,10180.48494,74
+"Mexico",mx.png,,9563.944075,75
+"Mauritius",mu.png,,9464.017716,76
+"Romania",ro.png,,9349.502512,77
+"Maldives",mv.png,,8826.160626,78
+"Gabon",ga.png,,8819.709806,79
+"Lebanon",lb.png,,8741.112406,80
+"St. Lucia",lc.png,,8689.937003,81
+"Grenada",gd.png,,8570.26125,82
+"Nauru",nr.png,,8359.214975,83
+"Suriname",sr.png,,8060.263597,84
+"Libya",ly.png,,7843.224502,85
+"Bulgaria",bg.png,,7529.7437,86
+"Dominica",dm.png,,7088.488431,87
+"Montenegro",me.png,,7059.974235,88
+"China",cn.png,,7038.367449,89
+"Botswana",bw.png,,7037.21195,90
+"Cuba",cu.png,,6998.233845,91
+"Colombia",co.png,,6961.30679,92
+"South Africa",za.png,,6643.009247,93
+"St. Vincent and the Grenadines",vc.png,,6635.261795,94
+"Belarus",by.png,,6580.749156,95
+"Turkmenistan",tm.png,,6429.986893,96
+"Dominican Republic",do.png,,6252.115555,97
+"Azerbaijan",az.png,,6226.506184,98
+"Iran, Islamic Rep.",ir.png,,6168.32657,99
+"Peru",pe.png,,6114.17762,100
+"Thailand",th.png,,5871.153861,101
+"Serbia",rs.png,,5826.653203,102
+"Ecuador",ec.png,,5822.054988,103
+"Iraq",iq.png,,5644.262232,104
+"Paraguay",py.png,,5462.910596,105
+"Namibia",na.png,,5251.023703,106
+"North Macedonia",mk.png,,5046.163638,107
+"Jamaica",jm.png,,4966.076881,108
+"Bosnia and Herzegovina",ba.png,,4897.385103,109
+"Algeria",dz.png,,4820.011078,110
+"Fiji",fj.png,,4756.58158,111
+"Belize",bz.png,,4723.809464,112
+"Angola",ao.png,,4469.498384,113
+"Albania",al.png,,4299.148167,114
+"Samoa",ws.png,,4062.336486,115
+"Tonga",to.png,,4045.821906,116
+"Tunisia",tn.png,,3995.811761,117
+"Jordan",jo.png,,3966.357996,118
+"Georgia",ge.png,,3950.629499,119
+"Guyana",gy.png,,3950.353339,120
+"Mongolia",mn.png,,3839.324268,121
+"Kosovo",ks.png,,3722.666683,122
+"Armenia",am.png,,3678.61817,123
+"Timor-Leste",tl.png,,3658.27331,124
+"Guatemala",gt.png,,3623.608127,125
+"Sri Lanka",lk.png,,3572.2644,126
+"Indonesia",id.png,,3537.221092,127
+"El Salvador",sv.png,,3518.177117,128
+"Marshall Islands",mh.png,,3492.046435,129
+"Eswatini",sz.png,,3448.640613,130
+"Tuvalu",tv.png,,3392.52816,131
+"Cabo Verde",cv.png,,3350.691427,132
+"Vanuatu",vu.png,,3067.692737,133
+"Egypt, Arab Rep.",eg.png,,3064.033291,134
+"Ukraine",ua.png,,3059.614183,135
+"Micronesia, Fed. Sts.",fm.png,,3058.471839,136
+"Morocco",ma.png,,2977.897969,137
+"Bolivia",bo.png,,2833.042244,138
+"Philippines",ph.png,,2685.658553,139
+"Nigeria",ng.png,,2581.125463,140
+"Papua New Guinea",pg.png,,2570.818755,141
+"Bhutan",bt.png,,2557.658134,142
+"Congo, Rep.",cg.png,,2486.2596,143
+"Honduras",hn.png,,2225.976633,144
+"Sudan",sd.png,,2124.532649,145
+"Moldova",md.png,,2021.669654,146
+"Nicaragua",ni.png,,1907.923367,147
+"Solomon Islands",sb.png,,1892.987919,148
+"Vietnam",vn.png,,1876.245883,149
+"Lao PDR",la.png,,1865.385299,150
+"Ghana",gh.png,,1835.816171,151
+"Uzbekistan",uz.png,,1803.711294,152
+"Kiribati",ki.png,,1631.183133,153
+"Djibouti",dj.png,,1615.884025,154
+"India",in.png,,1576.760881,155
+"Sao Tome and Principe",st.png,,1570.711446,156
+"Zambia",zm.png,,1565.225133,157
+"Yemen, Rep.",ye.png,,1428.584361,158
+"Cote d'Ivoire",ci.png,,1427.960936,159
+"Cameroon",cm.png,,1422.718854,160
+"Comoros",km.png,,1381.533947,161
+"Pakistan",pk.png,,1316.970682,162
+"Senegal",sn.png,,1293.636772,163
+"Mauritania",mr.png,,1266.421789,164
+"Kenya",ke.png,,1260.804349,165
+"Lesotho",ls.png,,1195.516118,166
+"Zimbabwe",zw.png,,1175.326395,167
+"Myanmar",mm.png,,1171.670268,168
+"Kyrgyz Republic",kg.png,,1150.790684,169
+"South Sudan",ss.png,,1082.681585,170
+"Bangladesh",bd.png,,1071.463768,171
+"Cambodia",kh.png,,1068.03031,172
+"Tajikistan",tj.png,,898.5036634,173
+"Chad",td.png,,876.6659057,174
+"Tanzania",tz.png,,874.8206042,175
+"Benin",bj.png,,835.0616404,176
+"Mali",ml.png,,790.7432942,177
+"Haiti",ht.png,,765.6839407,178
+"Nepal",np.png,,711.0129503,179
+"Guinea",gn.png,,706.0871162,180
+"Rwanda",rw.png,,679.2582378,181
+"Liberia",lr.png,,661.0433316,182
+"Burkina Faso",bf.png,,640.1119219,183
+"Gambia, The",gm.png,,636.8935795,184
+"Guinea-Bissau",gw.png,,629.3128757,185
+"Uganda",ug.png,,628.4876195,186
+"Afghanistan",af.png,,595.1696706,187
+"Togo",tg.png,,584.4627706,188
+"Sierra Leone",sl.png,,548.5776624,189
+"Ethiopia",et.png,,545.4856609,190
+"Mozambique",mz.png,,509.5654043,191
+"Somalia",so.png,,481.7035748,192
+"Congo, Dem. Rep.",cd.png,,440.4724674,193
+"Madagascar",mg.png,,434.9174653,194
+"Central African Republic",cf.png,,410.452534,195
+"Niger",ne.png,,383.2700244,196
+"Malawi",mw.png,,379.2786233,197
+"Burundi",bi.png,,266.9824247,198
