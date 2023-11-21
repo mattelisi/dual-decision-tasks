@@ -1,0 +1,5 @@
+date	id	age	gender	trial	decision	country_1	log_gdp_1	country_2	log_gdp_2	rr	accuracy	RT
+20-Nov-2023	ml01	35	m	1	1	Gabon	9.084744	Tunisia	8.293002	1	0	5.09
+20-Nov-2023	ml01	35	m	1	1	Faroe Islands	9.084744	Aruba	10.128910	0	1	20.87
+20-Nov-2023	ml01	35	m	2	1	Yemen, Rep.	7.264439	Latvia	9.556217	1	1	2.32
+20-Nov-2023	ml01	35	m	2	1	South Africa	7.264439	Bermuda	8.801320	1	1	1.38
