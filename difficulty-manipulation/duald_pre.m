@@ -88,7 +88,7 @@ ppd = va2pix(1,scr); % pixel per degree
 visual.ppd  = ppd;
 
 % fixation
-visual.fix_size = 0.3*ppd;
+visual.fix_size = 0.1*ppd;
 
 % stimulus size and ececntricity
 visual.stim_size = 4*ppd;
@@ -198,7 +198,7 @@ for t = 1:n_trials
     Screen('FillOval', scr.window, visual.black, CenterRectOnPoint([0,0, round(visual.fix_size), round(visual.fix_size)], scr.xCenter, scr.yCenter));
     Screen('DrawDots', scr.window, visual.dots_xy, visual.dots_size, visual.dots_col_1, [], 2);
     Screen('Flip', scr.window);
-    WaitSecs(iti)
+    WaitSecs(iti);
         
 end
 
