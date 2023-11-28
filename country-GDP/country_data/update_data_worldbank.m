@@ -10,8 +10,6 @@ else
     list_countries = load([parent_dir '/list_countries_complete.mat']);
 end
 
-
-
 % World Bank API endpoint for country list
 url = 'http://api.worldbank.org/v2/country?format=json&per_page=300';
 
@@ -65,6 +63,13 @@ for i = 1:length(list_countries.wordLists)
     end
 end
 
-%
-save('list_countries_complete_updated',list_countries, '-mat');
+% last update done on 23 Nov 2023
+save('list_countries_complete_updated.mat','-struct','list_countries');
+
+
+% % sanity checks
+% L1 = load([parent_dir '/list_countries_complete.mat']);
+% L2 = load([parent_dir '/list_countries_complete_updated.mat']);
+
+
 

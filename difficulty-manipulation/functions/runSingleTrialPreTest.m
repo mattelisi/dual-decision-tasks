@@ -1,4 +1,4 @@
-function [dataline1, first_correct] = runSingleTrialPreTest(scr, visual, leftKey, rightKey, soa_range, constrast_value)
+function [dataline1, first_correct, resp_right, signed_contrast] = runSingleTrialPreTest(scr, visual, leftKey, rightKey, soa_range, constrast_value)
 
 % DECISION 1 % --------------------------------------------------------
 
@@ -6,9 +6,11 @@ function [dataline1, first_correct] = runSingleTrialPreTest(scr, visual, leftKey
 % trial settings
 soa = soa_range(1)+rand(1)*(soa_range(2)-soa_range(1));
 % soa2 = soa_range(1)+rand(1)*(soa_range(2)-soa_range(1));
-side = round(rand(1,1)) + 1;
+side = binornd(1,0.5,1,1) + 1;
 
 phase1 = rand(1,1) * 2*pi;
+
+signed_contrast = sign((side-1.5))*constrast_value;
 
 % --------------------------------------------------------
 % fixation spot
@@ -16,6 +18,8 @@ Screen('FillOval', scr.window, visual.black, CenterRectOnPoint([0,0, round(visua
 Screen('DrawDots', scr.window, visual.dots_xy, visual.dots_size, visual.dots_col_1, [], 2);
 fix_on = Screen('Flip', scr.window);
 t_flip = fix_on;
+
+WaitSecs(soa - 2/3*scr.ifi);
 
 % --------------------------------------------------------
 % stimulus sequence
@@ -107,5 +111,5 @@ end
 first_correct = accuracy;
 
 % write data line to file
-dataline1 = sprintf('%i\t%2f\t%i\t%i\t%2f\n', 1, constrast_value, resp_right, accuracy, tResp);
+dataline1 = sprintf('%i\t%2f\t%i\t%i\t%i\t%2f\n', 1, constrast_value, side, resp_right, accuracy, tResp);
 %fprintf(datFid, dataline);

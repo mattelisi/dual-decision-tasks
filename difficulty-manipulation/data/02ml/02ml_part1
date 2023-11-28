@@ -1,0 +1,3 @@
+id	age	gender	trial	decision	contrast	side	response	accuracy	RT	conf	conf_RT	condition
+02ml	39	m	1	1	0.030003	2	0	0	0.557642	0.33	0.00	0
+02ml	39	m	1	2	0.030003	2	1	0	0.189925	0.33	0.00	0

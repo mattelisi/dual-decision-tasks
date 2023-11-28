@@ -1,4 +1,4 @@
-function [dataline1, dataline2, first_correct, second_correct] = runSingleTrial(scr, visual, pair1, pair2, flags_path, leftKey, rightKey)
+function [dataline1, dataline2, first_correct, second_correct] = runSingleTrial(scr, visual, pair1, pair2, flags_path, leftKey, rightKey, collect_confidence)
 
 % DECISION 1 % --------------------------------------------------------
 
@@ -82,12 +82,22 @@ end
 
 first_correct = accuracy;
 
-Screen('Flip', scr.window)
+Screen('DrawDots', scr.window, visual.dots_xy, visual.dots_size, visual.dots_col_1, [], 2);
+drawCenteredText(scr.window, '1', scr.xCenter, visual.dots_xy(2,1), visual.black, visual.textSize);
+Screen('Flip', scr.window);
+
 Screen('Close', flags_d1(1));
 Screen('Close', flags_d1(2));
 
+if collect_confidence(1)==1
+    [conf, conf_RT]=collect_confidence_rating(scr, visual, 1);
+else
+    conf= NaN;
+    conf_RT= NaN;
+end
+    
 % write data line to file
-dataline1 = sprintf('%i\t%s\t%.6f\t%s\t%.6f\t%i\t%i\t%.2f\n', 1, name1, loggdp1, name2,loggdp2, resp_right, accuracy, tResp);
+dataline1 = sprintf('%i\t%s\t%.6f\t%s\t%.6f\t%i\t%i\t%.2f\t%.2f\t%.2f\n', 1, name1, loggdp1, name2,loggdp2, resp_right, accuracy, tResp, conf, conf_RT);
 
 % DECISION 2 % --------------------------------------------------------
 
@@ -163,11 +173,19 @@ else
 end
 second_correct = accuracy;
 
+if collect_confidence(2)==1
+    [conf, conf_RT]=collect_confidence_rating(scr, visual, 2);
+else
+    conf= NaN;
+    conf_RT= NaN;
+end
 
 % write data line to file
-dataline2 = sprintf('%i\t%s\t%.6f\t%s\t%.6f\t%i\t%i\t%.2f\n', 1, name1, loggdp1, name2,loggdp2, resp_right, accuracy, tResp);
+dataline2 = sprintf('%i\t%s\t%.6f\t%s\t%.6f\t%i\t%i\t%.2f\t%.2f\t%.2f\n', 1, name1, loggdp1, name2,loggdp2, resp_right, accuracy, tResp, conf, conf_RT);
 
-Screen('Flip', scr.window)
+Screen('DrawDots', scr.window, visual.dots_xy, visual.dots_size, visual.dots_col_2, [], 2);
+drawCenteredText(scr.window, '1', scr.xCenter, visual.dots_xy(2,1), visual.black, visual.textSize);
+Screen('Flip', scr.window);
 Screen('Close', flags_d2(1));
 Screen('Close', flags_d2(2));
 

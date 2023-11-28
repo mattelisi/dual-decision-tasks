@@ -4,7 +4,7 @@ clear;
 sca;
 
 % add custom functions 
-addpath('./functions');
+addpath('functions');
 
 %----------------------------------------------------------------------
 %                       Collect information
@@ -27,6 +27,7 @@ scr.width   = 570;  % monitor width (mm)
 iti = 1; % inter trial interval
 n_trials = 150;
 n_trials_practice = 5;
+collect_confidence = [1, 1]; % if you want also self-report ratings after each decision [1, 2]
 
 %----------------------------------------------------------------------
 %                       Initialize PTB
@@ -54,8 +55,8 @@ visual.black = 0; %BlackIndex(screenNumber);
 visual.bgColor = visual.grey;
 
 % Open the screen
-%[scr.window,  scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [0 0 1800 1200], 32, 2); % debug
-[scr.window, scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [], 32, 2);
+[scr.window,  scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [0 0 1800 1200], 32, 2); % debug
+%[scr.window, scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [], 32, 2);
 
 % Flip to clear
 Screen('Flip',  scr.window);
@@ -109,10 +110,10 @@ visual.names_locations = [scr.xCenter-visual.stim_ecc, scr.yCenter+round(visual.
 % load list of countries
 parent_dir = pwd;
 if IsWin 
-    list_countries = load([parent_dir '\country_data/list_countries_complete.mat']);
+    list_countries = load([parent_dir '\country_data/list_countries_complete_updated.mat']);
     flags_path = [parent_dir '\country_data\Flags\'];
 else
-    list_countries = load([parent_dir '/country_data/list_countries_complete.mat']);
+    list_countries = load([parent_dir '/country_data/list_countries_complete_updated.mat']);
     flags_path = [parent_dir '/country_data/Flags/'];
 end
 
@@ -207,7 +208,7 @@ end
 
 % prep data header
 datFid = fopen([resultsDir sj.subjectID], 'w');
-fprintf(datFid, 'date\tid\tage\tgender\ttrial\tdecision\tcountry_1\tlog_gdp_1\tcountry_2\tlog_gdp_2\trr\taccuracy\tRT\n');
+fprintf(datFid, 'date\tid\tage\tgender\ttrial\tdecision\tcountry_1\tlog_gdp_1\tcountry_2\tlog_gdp_2\trr\taccuracy\tRT\tconf\tconf_RT\n');
 
 %----------------------------------------------------------------------
 %                       Practice trials
@@ -230,7 +231,7 @@ for t = 1:n_trials_practice
     [pair2, ~] = selectByDifficulty(country_pairs, 4 + randn(1)*0.5);
     
     % run trials
-    [~, ~, first_correct, second_correct] = runSingleTrial(scr, visual, pair1, pair2, flags_path, leftKey, rightKey);
+    [~, ~, first_correct, second_correct] = runSingleTrial(scr, visual, pair1, pair2, flags_path, leftKey, rightKey, collect_confidence);
     
     Screen('Flip', scr.window);
     
@@ -286,7 +287,7 @@ for t = 1:n_trials
     [pair2, country_pairs] = selectByDifficulty(country_pairs, gdp_diff + randn(1)*0.125);
     
     % run trials
-    [dataline1, dataline2, first_correct, second_correct] = runSingleTrial(scr, visual, pair1, pair2, flags_path, leftKey, rightKey);
+    [dataline1, dataline2, first_correct, second_correct] = runSingleTrial(scr, visual, pair1, pair2, flags_path, leftKey, rightKey, collect_confidence);
     
     % UPDATE STAIRCASE SETTING %-------------------------------------
     gdp_range = [min([country_pairs{:,7}]), max([country_pairs{:,7}])];

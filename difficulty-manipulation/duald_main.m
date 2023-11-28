@@ -9,9 +9,9 @@ addpath('functions');
 %----------------------------------------------------------------------
 %                       Collect information
 %----------------------------------------------------------------------
-newFile = 0;
+FileFound = 0;
 
-while ~newFile
+while ~FileFound
     subjectID=input('participantID: ','s');
     subjectAge=input('participant age: ','s');
     subjectGender=input('participant gender: ','s');
@@ -21,29 +21,34 @@ while ~newFile
     else
         resdir=[pwd '/data/' subjectID '/']; %sprintf('data/%s',subjectID);
     end
-    datfile = [resdir subjectID];
     datfile_info = [resdir subjectID '_th.mat'];
     
-    if exist(resdir,'file')==7
-        o = input('\n\n         This directory exists already. Should I continue/overwrite it [y / n]? ','s');
-        if strcmp(o,'y')
-            o = input('\n\n         Are you sure [y / n]? ','s');
-            if strcmp(o,'y')
-                o = input('\n\n         Are you like, really, really sure [y / n]? ','s');
-                if strcmp(o,'y')
-                    % delete files to be overwritten?
-                    % rmdir('test', 's') % to recursively delete - careful!
-                    if exist(datfile)>0;       delete(datfile); end
-                    if exist(datfile_info)>0;  delete(datfile_info); end
-                    newFile = 1;
-                end
-            end
-        end
+    if exist(resdir,'file')==7 && exist(datfile_info,'file')==2
+        load(datfile_info);
+        disp('              OK, files found!');
+        FileFound = 1;
     else
-        mkdir(resdir);
-        newFile = 1;
+        disp('              I cannot find the files: please double check the "participanID" and the content of the "data" folder.');
     end
 end
+
+% select session type and set name accordingly
+% note: current_session_type==1 -> mixed difficulties
+if isfield(th, 'session')
+    th.session = th.session+1;
+    if th.session_type(th.session-1)==0
+        current_session_type = 1;
+    elseif th.session_type(th.session-1)==1
+        current_session_type = 0;
+    end  
+    th.session_type = [th.session_type, current_session_type];
+else
+    th.session = 1;
+    current_session_type = binornd(1,0.5,1,1);
+    th.session_type = current_session_type;
+end
+
+datfile = [resdir subjectID '_part' num2str(th.session)];
 
 %----------------------------------------------------------------------
 %                 Prepare for saving data
@@ -51,7 +56,7 @@ end
 
 % prep data header
 datFid = fopen( datfile, 'w');
-fprintf(datFid, 'id\tage\tgender\ttrial\tdecision\tcontrast\tside\tresponse\taccuracy\tRT\n');
+fprintf(datFid, 'id\tage\tgender\ttrial\tdecision\tcontrast\tside\tresponse\taccuracy\tRT\tconf\tconf_RT\tcondition\n');
     
 %----------------------------------------------------------------------
 %                       Display settings
@@ -64,10 +69,21 @@ scr.width   = 570;  % monitor width (mm)
 %                       Task settings
 %----------------------------------------------------------------------
 
-soa_range = [0.1, 0.2];
+soa_range = [0.4, 0.6];
 iti = 0.5; % inter trial interval
-n_trials = 150;
+n_trials = 150; % it should be divisible by 5
 n_trials_practice = 10;
+
+% simulus selection (based on session type)
+if current_session_type==1
+    stim_tab = createTrialMatrix(th, n_trials);
+else
+    stim_tab = repmat(th.single_index, n_trials, 2);
+end
+disp(['launching condition: ',num2str(current_session_type)]);
+
+% if you want also self-report ratings after each decision [1, 2]
+collect_confidence = [1, 1]; 
 
 %----------------------------------------------------------------------
 %                       Initialize PTB
@@ -126,6 +142,8 @@ Screen('BlendFunction', scr.window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 %----------------------------------------------------------------------
 ppd = va2pix(1,scr); % pixel per degree
 visual.ppd  = ppd;
+
+visual.textSize = round(0.5*ppd);
 
 % fixation
 visual.fix_size = 0.1*ppd;
@@ -189,7 +207,53 @@ rightKey = KbName('RightArrow');
 %                       Practice trials
 %----------------------------------------------------------------------
 
+DrawFormattedText(scr.window, 'Welcome to our experiment \n\n < add instructions here > \n\n Press any key to start the practice',...
+    'center', 'center', visual.black);
+Screen('Flip', scr.window);
+WaitSecs(0.2);
+KbStrokeWait;
 
+HideCursor; % hide mouse cursor
+
+
+for t = 1:n_trials_practice
+    
+    % run trials
+    [~, ~, first_correct, second_correct] = runSingleTrial(scr, visual, leftKey, rightKey, soa_range,visual.contrast_lvls(stim_tab(Sample(1:n_trials),:)), collect_confidence);
+    
+    Screen('Flip', scr.window);
+    
+    % feedback
+    if first_correct==1 && second_correct==1
+        DrawFormattedText(scr.window, 'Well done! both answers were correct. \n Press a key to continue',...
+            'center', 'center', visual.black);
+        Screen('Flip', scr.window);
+        KbStrokeWait;
+        
+    elseif first_correct==1 && second_correct==0
+        
+        DrawFormattedText(scr.window, 'The 1st answer was correct, but you made an error in the 2nd. \n Press a key to continue',...
+            'center', 'center', visual.black);
+        Screen('Flip', scr.window);
+        KbStrokeWait;
+        
+    elseif first_correct==0 && second_correct==1
+        
+        DrawFormattedText(scr.window, 'The 2nd answer was correct, but you made an error in the 1st. \n Press a key to continue',...
+            'center', 'center', visual.black);
+        Screen('Flip', scr.window);
+        KbStrokeWait;
+    
+    elseif first_correct==0 && second_correct==0
+        
+        DrawFormattedText(scr.window, 'Both answers were wrong... \n Press a key to continue',...
+            'center', 'center', visual.black);
+        Screen('Flip', scr.window);
+        KbStrokeWait;
+        
+    end
+        
+end
 
 %----------------------------------------------------------------------
 %                       Experimental loop
@@ -202,41 +266,18 @@ KbStrokeWait;
 
 HideCursor; % hide mouse cursor
 
-% Staircase settings
-contrast_index = visual.n_contrast_lvls;
-constrast_value = visual.contrast_lvls(contrast_index);
-
-% data values for online analysis
-RR = NaN(1,n_trials);
-SC = NaN(1,n_trials);
-ACC = NaN(1,n_trials);
 
 % Animation loop: we loop for the total number of trials
 for t = 1:n_trials
     
-    [dataline1, first_correct, resp_right, signed_contrast] = runSingleTrialPreTest(scr, visual, leftKey, rightKey, soa_range, constrast_value);
-    
-    % UPDATE STAIRCASE SETTING %-------------------------------------
-    if  first_correct==1
-        contrast_index = contrast_index-1;
-        if contrast_index<1
-            contrast_index=1;
-        end
-    elseif first_correct==0
-        contrast_index = contrast_index+3;
-        if contrast_index > visual.n_contrast_lvls
-            contrast_index = visual.n_contrast_lvls;
-        end
-    end
-    constrast_value = visual.contrast_lvls(contrast_index);
-    
-    RR(t) = resp_right;
-    SC(t) = signed_contrast;
-    ACC(t) = first_correct;
+    [dataline1, dataline2, first_correct, second_correct] = runSingleTrial(scr, visual, leftKey, rightKey, soa_range,visual.contrast_lvls(stim_tab(t,:)), collect_confidence);
 
     % save data
-    dataline1 = sprintf('%s\t%s\t%s\t%i\t%s', subjectID, subjectAge, subjectGender, t, dataline1);
+    dataline1 = sprintf('%s\t%s\t%s\t%i\t%s\t%i\n', subjectID, subjectAge, subjectGender, t, dataline1, current_session_type);
     fprintf(datFid, dataline1);
+    
+    dataline2 = sprintf('%s\t%s\t%s\t%i\t%s\t%i\n', subjectID, subjectAge, subjectGender, t, dataline2, current_session_type);
+    fprintf(datFid, dataline2);
     
     Screen('FillOval', scr.window, visual.black, CenterRectOnPoint([0,0, round(visual.fix_size), round(visual.fix_size)], scr.xCenter, scr.yCenter));
     Screen('DrawDots', scr.window, visual.dots_xy, visual.dots_size, visual.dots_col_1, [], 2);
@@ -255,22 +296,6 @@ message_string = ['Experiment Finished! \n\n Your score for this part is ', num2
 DrawFormattedText(scr.window, message_string,...
     'center', 'center', visual.black);
 Screen('Flip', scr.window);
-
-% -------------------------------------------------------------------------
-% analyse data and store threshold
-% visual.n_contrast_lvls = 20;
-% visual.contrast_lvls = exp(linspace(log(0.025), log(0.8), visual.n_contrast_lvls));
-% datfile = '/mnt/sda2/matteoHDD/git_local_HDD/dual-decision-tasks/difficulty-manipulation/data/02ml/02ml'
-[id, age, gender, trial, decision, contrast, response, accuracy, RT] = importData(datfile);
-
-%th = computeThreshold(contrast,accuracy);
-th = computeThreshold_logContrast(contrast,accuracy);
-
-th = updateStructureUniqueIndices(th, visual.contrast_lvls);
-%th = updateStructure(th, visual.contrast_lvls);
-
-save(datfile_info, 'th');
-th
 
 % -------------------------------------------------------------------------
 % goodbye
