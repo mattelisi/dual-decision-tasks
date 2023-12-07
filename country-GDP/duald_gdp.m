@@ -55,8 +55,8 @@ visual.black = 0; %BlackIndex(screenNumber);
 visual.bgColor = visual.grey;
 
 % Open the screen
-[scr.window,  scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [0 0 1800 1200], 32, 2); % debug
-%[scr.window, scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [], 32, 2);
+%[scr.window,  scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [0 0 1800 1200], 32, 2); % debug
+[scr.window, scr.windowRect] = PsychImaging('OpenWindow', scr.screenNumber, visual.grey/255, [], 32, 2);
 
 % Flip to clear
 Screen('Flip',  scr.window);
@@ -214,7 +214,7 @@ fprintf(datFid, 'date\tid\tage\tgender\ttrial\tdecision\tcountry_1\tlog_gdp_1\tc
 %                       Practice trials
 %----------------------------------------------------------------------
 
-DrawFormattedText(scr.window, 'Welcome to our experiment \n\n < add instructions here > \n\n Press any key to start the practice',...
+DrawFormattedText(scr.window, 'Welcome to our experiment \n\n \n\n Press any key to start the practice',...
     'center', 'center', visual.black);
 Screen('Flip', scr.window);
 WaitSecs(0.2);

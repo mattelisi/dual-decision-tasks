@@ -195,7 +195,7 @@ rightKey = KbName('RightArrow');
 %                       Experimental loop
 %----------------------------------------------------------------------
 
-DrawFormattedText(scr.window, 'Welcome to our experiment \n\n < add instructions here > \n\n Press Any Key To Start',...
+DrawFormattedText(scr.window, 'Welcome to our experiment \n\n \n\n Press Any Key To Start',...
     'center', 'center', visual.black);
 Screen('Flip', scr.window);
 KbStrokeWait;
@@ -261,6 +261,8 @@ Screen('Flip', scr.window);
 % visual.n_contrast_lvls = 20;
 % visual.contrast_lvls = exp(linspace(log(0.025), log(0.8), visual.n_contrast_lvls));
 % datfile = '/mnt/sda2/matteoHDD/git_local_HDD/dual-decision-tasks/difficulty-manipulation/data/02ml/02ml'
+% datfile = '/home/matteo/git_local/dual-decision-tasks/difficulty-manipulation/data/99xx/99xx';
+% datfile_info = [datfile,'_th.mat'];
 [id, age, gender, trial, decision, contrast, response, accuracy, RT] = importData(datfile);
 
 %th = computeThreshold(contrast,accuracy);

@@ -6,6 +6,11 @@ sca;
 % add custom functions 
 addpath('functions');
 
+% Seed the random number generator. Here we use the an older way to be
+% compatible with older systems. Newer syntax would be rng('shuffle'). Look
+% at the help function of rand "help rand" for more information
+rand('seed', sum(100 * clock));
+
 %----------------------------------------------------------------------
 %                       Collect information
 %----------------------------------------------------------------------
@@ -94,11 +99,6 @@ PsychDefaultSetup(2);
 
 % Skip sync tests for demo purposes only
 Screen('Preference', 'SkipSyncTests', 2);
-
-% Seed the random number generator. Here we use the an older way to be
-% compatible with older systems. Newer syntax would be rng('shuffle'). Look
-% at the help function of rand "help rand" for more information
-rand('seed', sum(100 * clock));
 
 % Set the screen number to the external secondary monitor if there is one
 % connected
@@ -207,7 +207,7 @@ rightKey = KbName('RightArrow');
 %                       Practice trials
 %----------------------------------------------------------------------
 
-DrawFormattedText(scr.window, 'Welcome to our experiment \n\n < add instructions here > \n\n Press any key to start the practice',...
+DrawFormattedText(scr.window, 'Welcome to our experiment \n\n \n\n Press any key to start the practice',...
     'center', 'center', visual.black);
 Screen('Flip', scr.window);
 WaitSecs(0.2);
@@ -259,7 +259,7 @@ end
 %                       Experimental loop
 %----------------------------------------------------------------------
 
-DrawFormattedText(scr.window, 'Welcome to our experiment \n\n < add instructions here > \n\n Press Any Key To Start',...
+DrawFormattedText(scr.window, 'Practice finished! \n\n Press any key to begin the experiment \n\n From now on giving correct answers will increase your chance of winning the prize.',...
     'center', 'center', visual.black);
 Screen('Flip', scr.window);
 KbStrokeWait;

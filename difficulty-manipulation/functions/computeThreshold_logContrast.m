@@ -8,7 +8,7 @@ function [th] = computeThreshold_logContrast(x,r)
 options = optimset('Display', 'off') ;
 
 %
-x = log(x) - log(0.02);
+x = log(x +1);
 
 %
 n = length(x);
@@ -33,15 +33,13 @@ aic_w = calculate_akaike_weight([AICc_0 , AICc_1]);
 sigma = aic_w(1)*sigma_0 + aic_w(2)*sigma_1;
 
 % output parameters 
-%al = [0.55, 0.65, 0.75, 0.85, 0.95];
-al = [0.65, 0.7, 0.75, 0.8, 0.85];
+al =  linspace(0.6, 0.9, 5);
 th.single = quantile_fun(mean(al), sigma);
 th.multi  = [quantile_fun(al(1), sigma), quantile_fun(al(2), sigma), quantile_fun(al(3), sigma), quantile_fun(al(4), sigma), quantile_fun(al(5), sigma)];
-%th.multi  = [quantile_fun(al(1), sigma), quantile_fun(al(2), sigma), quantile_fun(al(3), sigma)];
 th.sigma = sigma;
 
-th.single = exp(th.single + log(0.02));
-th.multi = exp(th.multi + log(0.02));
+th.single = exp(th.single)-1;
+th.multi = exp(th.multi)-1;
 
 end
 
